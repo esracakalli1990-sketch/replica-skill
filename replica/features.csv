@@ -1,0 +1,27 @@
+feature,area,priority,original,clone,notes
+Create and save routes,routes,must,yes,no,
+Add stops by address search,stops,must,yes,no,
+Add a stop by long press on the map,stops,must,yes,no,
+Optimise the order of stops,optimisation,must,yes,no,listing: 300 stops per route and 100 stops in under 5 seconds
+Choose start and end stop or let the app pick the end,optimisation,must,yes,no,
+Show the optimised order as a list and on a map,results,must,yes,no,
+Choose vehicle type (car or motorcycle),route options,must,user-reported,no,not in the listing; confirm with screenshots
+Choose route preference (fastest time or shortest distance),route options,must,user-reported,no,not in the listing; confirm with screenshots
+Open the route in an external navigation app,navigation,must,yes,no,listing: Google Maps Yandex Waze Here WeGo and others
+Start the optimisation from current location or any stop,optimisation,should,yes,no,
+Stop details (phone email group note photo),stops,should,yes,no,
+Default note and message template,stops,should,yes,no,
+Confirm delivery from a notification and go to next stop,navigation,should,yes,no,
+Voice input for stops and notes,stops,should,yes,no,
+Add a stop by postcode in supported countries,stops,could,yes,no,
+Address book with filter and sort,address book,should,yes,no,
+Import stops from CSV KML GPX XLS,address book,should,yes,no,
+Visit logs with notes and photos,visits,should,yes,no,
+Share visit details,visits,should,yes,no,
+Route summary reports and distances per period,reports,could,yes,no,
+Share route information,routes,could,yes,no,
+Multi-language interface,settings,could,yes,no,
+Free credit allowance per route,monetisation,could,yes,no,design your own limits
+Watch a video ad for credit,monetisation,could,yes,skip,their ad setup is theirs; choose your own model
+Buy credits or subscribe,monetisation,could,yes,skip,their pricing is theirs; set your own
+Their name logo icons and copy,branding,could,yes,skip,not rebuilt; new brand via replica-brand
