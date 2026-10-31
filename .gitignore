@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .venv/
 *.tmp
+
+# reference screenshots of the app being cloned: never shipped, never committed
+replica/screens/

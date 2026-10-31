@@ -1,0 +1,48 @@
+feature,area,priority,original,clone,notes
+Create and save routes,routes,must,yes,yes,seen S01/S15
+Add stop by address search,stops,must,yes,yes,seen S05; search by Enter (the free search service forbids search-as-you-type); address-book matches show as you type
+Add stop by long press on the map,stops,must,yes,partial,read 1; implemented with the map's long-press event; not covered by the browser test
+Add current location as stop,stops,must,yes,yes,seen S04
+Paste coordinates as a stop,stops,should,yes,yes,seen S04
+Create a new stop by hand,stops,should,yes,partial,seen S04; implemented; not covered by the browser test
+Up to 300 stops per route,stops,must,yes,yes,read 1; limit enforced when adding; optimiser tested at 300 stops
+Optimise the order of stops,optimisation,must,yes,yes,"read 1: 100 stops under 5 seconds; own heuristic (nearest neighbour, 2-opt, or-opt); 300 stops inside the 1.5 s budget in the unit test"
+Start from My Location or any stop,optimisation,must,yes,yes,"seen S06; start stop is a hard constraint, tested"
+End point: auto or any stop or back to the starting stop,optimisation,must,yes,yes,seen S06; unit tested; screen choice not browser-tested for every option
+Optimisation method: by distance or by duration,optimisation,must,yes,partial,seen S06; sent to the routing engine as a shortest flag; engine behaviour not verified against a live server
+Vehicle mode: car bicycle motorcycle walking,optimisation,must,yes,partial,"seen S06 (locked behind a subscription in the original; free in MotoNav); free in MotoNav, motorcycle default; request is built and tested, real engine result not verified"
+Use ferry / tolls / highways / allow U-turn switches,optimisation,must,yes,partial,"seen S06; ferry, tolls, highways sent to the engine; no U-turn switch"
+Route start time and planned time per stop,optimisation,should,yes,yes,seen S03 S06
+Service time per stop,stops,should,yes,yes,seen S03
+Route map with numbered markers and route line,results,must,yes,yes,seen S02; tested with the map library; road line needs a reachable routing server
+Distance and duration banner with vehicle icon,results,must,yes,yes,seen S02; marked as an estimate when road data was not available
+List view with planned times,results,must,yes,yes,seen S03
+Stop colours,results,could,yes,no,read 1 and seen S03; stops are coloured by status only
+Filter stops,results,could,yes,no,seen S02 filter icon
+Navigate to a stop in an external navigation app,navigation,must,yes,yes,"read 1: Google Maps Yandex Waze Here WeGo; Google Maps link tested (two-wheeler mode for motorcycles); Waze, Yandex, Apple, HERE links unit tested only"
+Mark stop done or failed,navigation,must,yes,yes,seen S03
+Confirm delivery from a notification and go to next stop,navigation,should,yes,no,read 1; needs Android; web prototype cannot; needs a native Android app
+Phone and message buttons on a stop,stops,should,yes,partial,seen S03; call link only; no message button
+Note and photo on a stop,visits,should,yes,partial,"seen S07; notes yes, photos no"
+Note template,visits,should,yes,yes,seen S07
+Message template,visits,could,yes,no,read 1
+Voice input for search and notes,stops,should,yes,partial,seen S05 S07; uses the browser's speech recognition where it exists; not tested
+Address book with filter and sort,address book,should,yes,yes,read 1
+Favorite stops,address book,should,yes,yes,seen S01
+Import CSV KML GPX XLS,address book,should,yes,partial,"seen S01 headline; CSV, GPX, KML; Excel must be saved as CSV"
+Import Google Maps starred places,address book,could,yes,no,read 1
+Add a stop by postcode (supported countries),stops,could,yes,no,read 1
+Reports: routes by date with stops and distance,reports,could,yes,yes,seen S08; table with date filter
+Share route and visit details,reports,could,yes,no,read 1; app share link only
+Backup and restore,storage,should,yes,partial,seen S01 card; JSON export and import; not covered by the browser test
+Light and dark theme,settings,could,yes,yes,"seen S01 vs 09; dark first, light and auto"
+Multi-language interface,settings,could,yes,partial,read 1; Turkish and English
+Works without an account,account,must,no,yes,improvement: users complain about forced sign-up
+Motorcycle as the default vehicle,optimisation,must,no,yes,improvement for MotoNav
+Free planning with no credit meter,monetisation,must,no,yes,improvement from complaints
+Chosen start stop is a hard constraint,optimisation,must,no,yes,improvement from a reported bug; unit test and browser test
+Offline stop list and saved routes,storage,should,no,partial,improvement; data is on the device and the app shell is cached; offline start not tested
+Show distance and time impact of highway and toll choices,optimisation,could,no,no,improvement
+Credits and video ads,monetisation,could,yes,skip,their credit and ad system is theirs
+Subscription plans,monetisation,could,yes,skip,pricing is yours to set
+Their name logo icons and store images,branding,could,yes,skip,MotoNav has its own

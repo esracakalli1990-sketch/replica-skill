@@ -1,0 +1,126 @@
+{
+  "store": "play",
+  "url": "https://play.google.com/store/apps/details?id=tr.com.ussal.smartrouteplanner",
+  "name": "Routin Smart Route Planner",
+  "developer": "Routin Inc",
+  "badges": [
+    "Contains ads",
+    "In-app purchases"
+  ],
+  "short_description": "Create a route, add your stops, and start multi stop route planning",
+  "category": "Maps & Navigation",
+  "content_rating": "Everyone",
+  "price": "0",
+  "rating": "4.7",
+  "developer_site": "https://www.routin.com.tr",
+  "trailer": "https://www.youtube.com/watch?v=XW4apL1IqLw",
+  "description": "Multi Stop Route Planner and Optimizer \n\nRoutin is a route planning app. It is quite useful for drivers who should visit many addresses daily. By using Routin, you can sort your stops/jobs optimally according to the chosen locations and finish your jobs in a shorter time.\n\nCREATE A ROUTE, ADD STOPS AND CLICK OPTIMIZE! \nROUTIN PLANS YOUR ROUTE FOR YOU!! \n\nSelect the starting and ending stops or let Routin select the ending stop for you. Optimized order of stops can be seen in a list or on map. You can follow along your optimized route via a selected navigation app and enjoy your ride!\n\n Key Features \n\n- You can add 300 stops per route and optimize them for free. If your credit is not enough, you can continue using the app by watching video ads, purchasing credits, or subscribing.\n- By optimizing your route, you can increase your daily deliveries and save time and fuel\n- Fast and reliable optimization algorithm. Don't wait for optimization. Optimize 100 stops under 5 seconds\n- In your own language, you can use the voice input feature to add stops or notes\n- You can use Google Maps, Yandex Maps, Waze, Here WeGo or any other GPS navigation apps\n- Using notifications, you can confirm the delivery and start navigating to your next stop without leaving the navigation app\n- You can add extra information to stops such as phone number, email address, group, note, photo etc.\n- You can define a default note or message template. So, you can send a message quickly\n- You can start the optimization from your current location or from any stop on your route\n- You can quickly create your routes by pressing down on the map or searching for addresses\n- When adding addresses, you can quickly add them just by searching by street name and number\n- You can add stops by postcode in supporting countries (such as Great Britain, Singapore)\n\nAddress Book\n\nRoutin helps you to manage your contacts, customers, delivery or visit addresses using an Address Book\nStore names, phone numbers, photos, locations (latitude, longitude) and addresses of your stops.\nImport multiple stops data using a file (CSV, KML, GPX, XLS).\nImport Google Maps starred locations.\nFilter your stops according to name, address, or phone number.\n\nVisit Records\n\nTake notes and photos of your visit to a stop on a route. Share visit details and display past visit data.\nShare your route details, display summary report about your routes and planned distances for a selected period.\n\nThe application is used extensively for the following sectors and jobs\n\n- Cargo services: Package delivery or package picking\n- Health services: Patient examination or care visits\n- Aid services: Municipalities or associations delivering aid packages or meals\n- Sales / Marketing services: Customer visits, product distribution\n- Personnel / Student transportation: Planning the shuttle routes\n- Tourism: Planning tourist services, creating a travel route\n- Planning of supply chain routes\n- Food delivery: Food delivery by motor courier\n- On-site installation, maintenance, and repair services: Repair, maintenance and installation services for air conditioning, white goods, electronic equipment\n- Daily milk, fresh fruits and vegetables, carboy water sales and delivery\n- Dry cleaning, carpet and seat washing services\n- Private courier services\n- Optimizing routes for reading electricity, water, and natural gas meters\n- Optimizing garbage collection routes\n- Planning meetings at multiple locations\n\nForeground service permission is required for the ability to mark stops (automatically based on your location or when using navigation apps).",
+  "downloads": "1M+",
+  "rating_count": "27.1K",
+  "updated": "Oct 19, 2026",
+  "whats_new": [
+    "Easier address search, regardless of accents or special characters",
+    "Search addresses from your address book or map data on the route screen",
+    "Choose which fields to include in address book searches",
+    "Option to hide the Optimize button",
+    "Bug fixes and performance improvements"
+  ],
+  "data_safety": [
+    "Safety starts with understanding how developers collect and share your data. Data privacy and security practices may vary based on your use, region, and age. The developer provided this information and may update it over time.",
+    "No data shared with third parties",
+    "about how developers declare sharing",
+    "This app may collect these data types",
+    "Location, Personal info and 2 others",
+    "Data is encrypted in transit",
+    "You can request that data be deleted"
+  ],
+  "developer_contact": [
+    "ROUTIN BILGI TEKNOLOJILERI ANONIM SIRKETI",
+    "support@routin.com.tr",
+    "KAZLICESME MAH. 245.SK NO:5",
+    "ZEYTINBURNU",
+    "34020 Istanbul/İstanbul",
+    "Türkiye",
+    "+90 530 810 24 94"
+  ],
+  "similar_apps": [
+    {
+      "name": "Spoke (Circuit) Route Planner",
+      "developer": "Circuit Routing Limited",
+      "rating": "4.6"
+    },
+    {
+      "name": "Sygic: GPS Navigation & Maps",
+      "developer": "Sygic.",
+      "rating": "4.1"
+    },
+    {
+      "name": "Sygic GPS Truck & Caravan",
+      "developer": "Sygic.",
+      "rating": "3.6"
+    },
+    {
+      "name": "Multi-Stop Route Planner",
+      "developer": "MapoScope - Delivery Route Optimization Experts",
+      "rating": "4.5"
+    },
+    {
+      "name": "TomTom - Maps & Traffic",
+      "developer": "TomTom International BV",
+      "rating": "4.3"
+    },
+    {
+      "name": "Zeo Fast Multi Stop Route Plan",
+      "developer": "Zeo Business",
+      "rating": "4.5"
+    }
+  ],
+  "screenshots": [
+    "https://play-lh.googleusercontent.com/BwRwbLS82eMYJSXpVnCGbVb1zO1yFFUgXEftdqG7_OyHhX6bYK5PMsOxNV-2zeJ69FuvhhLgTUmcmJRPBdFpiw=w526-h296",
+    "https://play-lh.googleusercontent.com/G4GuTKV75TM3rMCnYCdcYMlqz6uuld7RJtrsBBxWYbqck6VfV-gx0mqeiGKBsKIEXkZo8z9A2-zPlLTgdugkogc=w526-h296",
+    "https://play-lh.googleusercontent.com/r596doiN6zkidkwY2UAfO544AfYv8HsxJi-kezXp6FKceI1aE9flLRKbssvC1nt_G8V8B5LtN7UZWQjvgzEHmwc=w526-h296",
+    "https://play-lh.googleusercontent.com/N7FWn0ceophwnGvlMUDlnl8dAcJ84SsA5KFjFiFHeAeVtjOrR6hKbwyXbjT8OemNeJc337EfTZ2BI4zGO5EVZA=w526-h296",
+    "https://play-lh.googleusercontent.com/EF7GhfEvol4zA_e2h6BXP0Ky6ZLNyzB2qcr74oXIfb_JaU-4iie5c8ucdypiPl4Mjs2EcjDSg7ZIah1TbC_JeIY=w526-h296",
+    "https://play-lh.googleusercontent.com/Gv7KvJZUTmZkSP-liYN-0LwMWliPpN8-bc2tttvvU5pmtANJcoTmoa0qZLpt64bvCK0CT-J8TDVc3gN2wsEp=w526-h296",
+    "https://play-lh.googleusercontent.com/GG5SVqSpzLwQFBsOeMdzRjHV10lOiHbSlp7LnwE-4UjUPegSxbSqrxFQOLGyr225x_oBN4Nz0UV3fAhSjiui=w526-h296",
+    "https://play-lh.googleusercontent.com/xxkkXgY0uPJi1VMKuB38fYP8-GV0QeAG9_fu5XCfZTVUuhRyKSjnq9mEZ_Pv5bpyK_qcOlXym-7UWELgxyTh=w526-h296",
+    "https://play-lh.googleusercontent.com/YLCbZz76SWvM6xbY5YiOgc39nlk4SmAJ_foxFZ-Fli_vpX2hHAK-tGE4pYdquFUm-eQCpK_9D96Q1RKmWzHS0oY=w526-h296",
+    "https://play-lh.googleusercontent.com/RxaDgVcBdvgBT6uDY3Gc6X7yTKjgsDoedeNI9qu_taKHsJeSy-Ge5HZtFOrvll5KrTnngqRGy6bbZPVOlcf8=w526-h296",
+    "https://play-lh.googleusercontent.com/1-6BB6yFQy9OasdiU8OYMCFT4T0_eYQ6Ai1sg1BLyTPUqXKTyhs5Coz_kxQ-NtKtB2MoE7rtURo2FIiHORA39w=w526-h296"
+  ],
+  "icon": "https://play-lh.googleusercontent.com/u_cZUgJJf8UwMrb2lGmi9bb_PYdT9cZC18RcYOd1guedAp6NLawsaysq9w5WmtoB60vGIA736IjMVP-jlwUfWHk=s0-br30",
+  "reviews": [
+    {
+      "author": "Jensen",
+      "date": "November 24, 2024",
+      "rating": 1,
+      "text": "Another app that requires you to create an account, to log-in, so that you can use it, so that you can test it. That's obviously not the right way to get more users. I always try the apps before making a commitment, before creating an account, before connecting it to my email addresses. What happened to those apps where we the users can test the app before giving our personal info?; something that's absolutely not necessary for some initial tests."
+    },
+    {
+      "author": "Tom Robey",
+      "date": "June 4, 2021",
+      "rating": 5,
+      "text": "I'm a real estate appraiser and this app is great for organizing my routes. It's pay as you need which I feel is great value. If I'm slow for a month I'm not stuck paying a fee for an app I don't use. If I'm super busy then I have no qualms paying for extra credits. The app's functionality is fantastic. Once you check off a stop it automatically loads Google maps with the next address. It's very fluid and seamless. I've tried a bunch of routing apps and this is the best by far."
+    },
+    {
+      "author": "KC George W",
+      "date": "October 18, 2022",
+      "rating": 3,
+      "text": "Kind of inconsistent, I go to the same addresses every week and it randomly sends me to a drastically different number. Update 10/18: After being advised to use GPS instead of address input due to my location most of my navigating to wrong locations has been corrected. The past few weeks it has begun to send me to the wrong part of town with some entries, but if I hit navigate a 2nd time it corrects itself. Be sure to double check where your nav is sending you."
+    }
+  ],
+  "notes": [],
+  "saved_screens": [
+    "replica/screens/store-01.jpg",
+    "replica/screens/store-02.jpg",
+    "replica/screens/store-03.jpg",
+    "replica/screens/store-04.jpg",
+    "replica/screens/store-05.jpg",
+    "replica/screens/store-06.jpg",
+    "replica/screens/store-07.jpg",
+    "replica/screens/store-08.jpg",
+    "replica/screens/store-09.png",
+    "replica/screens/store-10.png",
+    "replica/screens/store-11.png"
+  ]
+}
