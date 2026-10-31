@@ -176,6 +176,13 @@ class Fetching(unittest.TestCase):
         self.assertEqual(get.call_count, 3)
         self.assertEqual(notes, [])
 
+    def test_size_suffix_is_replaced_not_stacked(self):
+        l = {"screenshots": ["https://play-lh.googleusercontent.com/abc=w526-h296"]}
+        with tempfile.TemporaryDirectory() as d, \
+                mock.patch.object(sp, "http_get", return_value=(b"x", "image/jpeg")) as get:
+            sp.save_screens(l, d, 1, 0, "play")
+        get.assert_called_once_with("https://play-lh.googleusercontent.com/abc=w900", binary=True)
+
     def test_non_image_response_stops_the_download(self):
         l = {"screenshots": ["https://play-lh.googleusercontent.com/s1"]}
         with tempfile.TemporaryDirectory() as d, \

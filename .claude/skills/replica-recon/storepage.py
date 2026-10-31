@@ -368,12 +368,15 @@ def save_screens(listing, folder, limit, delay, store):
         return saved, notes
     os.makedirs(folder, exist_ok=True)
     for n, u in enumerate(urls, 1):
-        src = u + "=w720" if store == "play" else re.sub(r"/\d+x\d+[a-z]*\.(jpg|png|webp)$", r"/720x1280bb.\1", u)
+        src = re.sub(r"=[^/=]*$", "", u) + "=w900" if store == "play" else re.sub(r"/\d+x\d+[a-z]*\.(jpg|png|webp)$", r"/720x1280bb.\1", u)
         try:
             data, ctype = http_get(src, binary=True)
         except StoreError as e:
-            notes.append("screenshots not saved: %s. Allow the host %s in the environment's network settings, "
-                         "or send the screenshots by hand." % (e, IMAGE_HOSTS[store]))
+            if "HTTP" in str(e):
+                notes.append("screenshots not saved: %s" % e)
+            else:
+                notes.append("screenshots not saved: %s. Allow the host %s in the environment's network "
+                             "settings, or send the screenshots by hand." % (e, IMAGE_HOSTS[store]))
             break
         if not ctype.startswith("image/"):
             notes.append("screenshot %d was not an image (%s); stopped" % (n, ctype or "unknown type"))
