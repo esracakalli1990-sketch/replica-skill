@@ -89,8 +89,8 @@ jobs:
           grep -q "uses-permission: name='android.permission.ACCESS_FINE_LOCATION'" badging.txt
           grep -q "application-icon-" badging.txt
           mkdir -p dist
-          cp "$APK" "dist/MotoNav-${VERSION_NAME}.apk"
-          (cd dist && sha256sum "MotoNav-${VERSION_NAME}.apk" | tee "MotoNav-${VERSION_NAME}.apk.sha256")
+          cp "$APK" dist/MotoNav.apk
+          (cd dist && sha256sum MotoNav.apk | tee MotoNav.apk.sha256)
 
       - uses: actions/upload-artifact@v4
         with:

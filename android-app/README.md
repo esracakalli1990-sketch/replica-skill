@@ -4,8 +4,10 @@ This folder wraps the web app in `../motonav` as an Android app with Capacitor. 
 
 ## Get the APK
 
-1. Open the repository on GitHub, then Releases, then the release named `motonav-latest`.
-2. Download `MotoNav-<version>.apk` on the phone.
+1. On the phone, open this link, which always points at the newest build:
+   https://github.com/esracakalli1990-sketch/replica-skill/releases/download/motonav-latest/MotoNav.apk
+   (The same file is on the repository's Releases page, release `motonav-latest`.)
+2. Wait for the download to finish.
 3. Open it. Android asks to allow installs from the browser or file manager: allow it for this one install.
 4. Open MotoNav, allow location when asked.
 
