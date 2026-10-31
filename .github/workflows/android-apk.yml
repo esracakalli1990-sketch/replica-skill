@@ -65,6 +65,7 @@ jobs:
               -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=MotoNav, O=MotoNav, C=TR"
             echo "No signing key in secrets: made a one-off key. Uninstall the old app before installing a newer APK."
           fi
+          echo "::add-mask::$PASS"
           echo "KEYSTORE_FILE=$KS" >> "$GITHUB_ENV"
           echo "KEYSTORE_PASSWORD=$PASS" >> "$GITHUB_ENV"
           echo "KEY_ALIAS=$ALIAS" >> "$GITHUB_ENV"
