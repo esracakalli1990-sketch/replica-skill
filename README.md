@@ -118,9 +118,11 @@ are only thinking about cloning is a good way to find out if you should.
 
 ## The tools
 
-Six of them, all standard-library Python. None touch the network.
+Seven of them, all standard-library Python. Six never touch the network.
+`storepage.py` reads one public store page and a few screenshots, nothing more.
 
 ```bash
+python3 replica-recon/storepage.py "<store link>" --out replica        # listing, reviews, screenshots, similar apps
 python3 replica-diff/imgdiff.py original.png clone.png --out diff.png   # layout diff, ignores colour
 python3 replica-diff/parity.py replica/features.csv                     # parity score + missing list
 python3 replica-entrepreneur/reviews.py replica/reviews.csv             # what users hate, ranked, linked
@@ -128,6 +130,13 @@ python3 replica-design/contrast.py replica/design/tokens.json           # WCAG c
 python3 replica-brand/sweep.py . --avoid "Original App"                 # anything of the original left?
 python3 replica-launch/listing.py replica/launch/listing.json           # store limits + copycat checks
 ```
+
+**`storepage.py`** is what lets `/replica-recon` start on its own from a link.
+It reads the Google Play or App Store page (description verbatim, rating,
+downloads, what's new, data safety, the store's similar apps, the trailer
+link, the reviews on the page) and saves up to 12 screenshots one second
+apart. Nothing is guessed: a field the page does not show stays empty and the
+notes say why. If the network blocks the image host, it names the host to allow.
 
 **`imgdiff.py`** reads PNGs with no libraries, turns both screenshots into
 edge maps and compares where things are, so your new colours do not count
@@ -188,7 +197,7 @@ there is money on the line. This is not legal advice.
 ## Files
 
 ```
-replica-recon/         SKILL.md, recon-map.md, features.csv (the matrix template)
+replica-recon/         SKILL.md, recon-map.md, features.csv (the matrix template), storepage.py
 replica-architect/     SKILL.md, architecture.md
 replica-design/        SKILL.md, tokens.json, contrast.py
 replica-build/         SKILL.md

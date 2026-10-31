@@ -4,6 +4,8 @@ Scope: {{the slice being cloned}}
 For: {{who the clone is for}}
 Date: {{YYYY-MM-DD}}
 
+Evidence: every screen, flow and field is marked seen (in a screenshot opened), read (in a page, with URL) or guess.
+
 ## Sources
 
 | # | source | URL | notes |
@@ -56,3 +58,7 @@ See `features.csv`. Must: {{n}}, should: {{n}}, could: {{n}}, skip: {{n}}.
 ## Size
 
 Screens {{n}}, flows {{n}}, entities {{n}}. Hard parts: {{list}}. Size: {{S|M|L|XL}}.
+
+## Where the clone can beat the original
+
+- {{complaint or gap, with the review or page link and how many reviews say it}}

@@ -72,9 +72,10 @@ recon -> architect -> design -> build -> backend -> test -> diff -> entrepreneur
 
 ## 5. Python araçları
 
-Hepsi standart kütüphane ile yazılmış, internete bağlanmaz:
+Yedi araç var, hepsi standart kütüphane ile yazılmış. `storepage.py` dışındakiler internete bağlanmaz. `storepage.py` yalnızca tek bir herkese açık mağaza sayfasını ve birkaç ekran görüntüsünü okur:
 
 ```bash
+python3 replica-recon/storepage.py "<mağaza linki>" --out replica       # açıklama, yorumlar, ekran görüntüleri, benzer uygulamalar
 python3 replica-diff/imgdiff.py orijinal.png klon.png --out fark.png   # Düzen farkı (renk yok sayılır)
 python3 replica-diff/parity.py replica/features.csv                     # Özellik eşleşme puanı
 python3 replica-entrepreneur/reviews.py replica/reviews.csv             # Kullanıcı şikayetleri, sıralı ve linkli
@@ -87,6 +88,8 @@ Testleri çalıştırmak için:
 ```bash
 python3 -m unittest discover -s tests -v
 ```
+
+`storepage.py`, `/replica-recon`'un sadece bir linkle kendi başına başlamasını sağlar. Google Play ya da App Store sayfasını okur: açıklama (birebir), puan, indirme sayısı, yenilikler, veri güvenliği, mağazanın "benzer uygulamalar" listesi, fragman linki ve sayfadaki yorumlar. En fazla 12 ekran görüntüsünü bir saniye arayla kaydeder. Sayfada olmayan bilgiyi uydurmaz. Ağ, resim sunucusunu engelliyorsa hangi adresin izin listesine eklenmesi gerektiğini söyler.
 
 ## 6. Klasör yapısı
 
