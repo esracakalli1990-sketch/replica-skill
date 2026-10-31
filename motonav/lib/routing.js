@@ -100,6 +100,26 @@
     }).catch(function () { return null; });
   }
 
-  return { costingOptions: costingOptions, matrix: matrix, geometry: geometry,
+  /* Points spread evenly along a road line, to hand to a navigation app that would otherwise
+   * pick its own route. Returns [[lat, lng], ...] without the two ends. Short lines get none. */
+  function sampleVia(line, max) {
+    if (!line || line.length < 2) return [];
+    var cum = [0], i;
+    for (i = 1; i < line.length; i++) {
+      cum.push(cum[i - 1] + Opt.haversine({ lat: line[i - 1][0], lng: line[i - 1][1] }, { lat: line[i][0], lng: line[i][1] }));
+    }
+    var total = cum[cum.length - 1];
+    var k = Math.min(max || 8, Math.floor(total / 1500));
+    var out = [], seg = 1;
+    for (var n = 1; n <= k; n++) {
+      var at = n * total / (k + 1);
+      while (seg < cum.length - 1 && cum[seg] < at) seg++;
+      var span = cum[seg] - cum[seg - 1], f = span > 0 ? (at - cum[seg - 1]) / span : 0;
+      out.push([line[seg - 1][0] + (line[seg][0] - line[seg - 1][0]) * f, line[seg - 1][1] + (line[seg][1] - line[seg - 1][1]) * f]);
+    }
+    return out;
+  }
+
+  return { costingOptions: costingOptions, matrix: matrix, geometry: geometry, sampleVia: sampleVia,
     decodePolyline6: decodePolyline6, MATRIX_LIMIT: MATRIX_LIMIT };
 });

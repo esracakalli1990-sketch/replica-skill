@@ -34,7 +34,7 @@ const hav = (a, b) => { const t = Math.PI / 180, dl = (b.lat - a.lat) * t, dn = 
 function enc(coords) { let o = '', pl = 0, pg = 0; for (const [la, lo] of coords) { for (const v of [Math.round(la * 1e6) - pl, Math.round(lo * 1e6) - pg]) { let x = v < 0 ? ~(v << 1) : v << 1; while (x >= 32) { o += String.fromCharCode((32 | (x & 31)) + 63); x >>= 5; } o += String.fromCharCode(x + 63); } pl = Math.round(la * 1e6); pg = Math.round(lo * 1e6); } return o; }
 
 async function setup(browser, base, opts) {
-  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, geolocation: { latitude: 41.015, longitude: 28.979 }, permissions: ['geolocation'], locale: 'tr-TR' });
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, geolocation: { latitude: 40.95, longitude: 29.1 }, permissions: ['geolocation'], locale: 'tr-TR' });
   const page = await ctx.newPage(); page.setDefaultTimeout(6000);
   const log = { valhalla: [], errors: [], nav: [] };
   page.on('pageerror', e => log.errors.push(String(e)));
@@ -153,6 +153,23 @@ async function addBySearch(page, q) {
     const url = await until(() => log.nav[0]);
     assert.match(url, /maps\/dir\/\?api=1&destination=.*&travelmode=(driving|two-wheeler)/);
     assert.match(url, /two-wheeler|driving/);
+  });
+  await step('with shortest distance, navigating hands Google Maps a route through via points', async () => {
+    await page.click('text=Optimize et');
+    await page.locator('.modes button', { hasText: 'Motosiklet' }).click();
+    await page.locator('.radio input[value="distance"]').check();
+    await page.locator('.sheet .primary').click();
+    await until(() => page.evaluate(() => window.MotoNavDebug.state().routes[0].method === 'distance'));
+    await until(() => page.evaluate(() => !!window.MotoNavDebug.state().routes[0].plan));
+    log.valhalla.length = 0; log.nav.length = 0;
+    await page.locator('.stop.failed, .stop.done').first().waitFor().catch(() => {});
+    await page.click('button[aria-label="Yol tarifi"]');
+    const url = await until(() => log.nav[0]);
+    assert.ok(/travelmode=two-wheeler&waypoints=/.test(url), 'link was: ' + url + ' routing calls: ' + JSON.stringify(log.valhalla.map(x => x.path)));
+    const r = log.valhalla.filter(x => x.path === '/route' && x.body.locations.length === 2).pop();
+    assert.ok(r, 'no two-point route request');
+    assert.strictEqual(r.body.costing_options.motorcycle.shortest, true);
+    assert.ok(url.split('waypoints=')[1].split('%7C').length >= 1);
   });
   await step('import a CSV into the address book and the route', async () => {
     await page.click('button[aria-label="Ekle"]'); await page.click('text=Durakları içe aktar');

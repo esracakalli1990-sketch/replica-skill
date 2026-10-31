@@ -32,7 +32,7 @@
       importDone: 'içe aktarıldı', skipped: 'atlandı', geocoding: 'Adresler konuma çevriliyor', demoWarn: 'Demo sunucu yalnızca deneme içindir; yayın için kendi sunucunuzu girin.',
       noMap: 'Harita yüklenemedi (internet yok olabilir). Liste görünümü kullanılıyor.', waiting: 'Bekliyor',
       nothing: 'Kayıt yok.', addToRoute: 'Rotaya ekle', open: 'Aç', voice: 'Sesle yaz', noVoice: 'Bu tarayıcı sesli girişi desteklemiyor.',
-      pickRoute: 'Hangi rotaya eklensin?', dark: 'Koyu', light: 'Açık', autoTheme: 'Otomatik', pending: 'bekleyen'
+      pickRoute: 'Hangi rotaya eklensin?', navPrep: 'En kısa mesafe rotası hazırlanıyor...', navNoLoc: 'Konum alınamadı. Navigasyon uygulaması kendi rotasını seçecek.', navNoRoute: 'Yol verisi alınamadı. Navigasyon uygulaması kendi rotasını seçecek.', navShortest: 'En kısa mesafe:', navVia: 'ara nokta', navNote: 'En kısa mesafe seçiliyse navigasyona geçerken rota, ara noktalarla Google Haritalar veya Yandex\'a aktarılır. Diğer uygulamalar kendi rotasını seçer.', dark: 'Koyu', light: 'Açık', autoTheme: 'Otomatik', pending: 'bekleyen'
     },
     en: {
       home: 'Home', routes: 'Routes', book: 'Address book', more: 'More',
@@ -57,7 +57,7 @@
       importDone: 'imported', skipped: 'skipped', geocoding: 'Looking up addresses', demoWarn: 'The demo server is for testing only; enter your own server for real use.',
       noMap: 'The map could not load (you may be offline). Using the list view.', waiting: 'Waiting',
       nothing: 'Nothing here.', addToRoute: 'Add to route', open: 'Open', voice: 'Speak', noVoice: 'This browser has no voice input.',
-      pickRoute: 'Add to which route?', dark: 'Dark', light: 'Light', autoTheme: 'Auto', pending: 'pending'
+      pickRoute: 'Add to which route?', navPrep: 'Preparing the shortest-distance route...', navNoLoc: 'No location. The navigation app will pick its own route.', navNoRoute: 'No road data. The navigation app will pick its own route.', navShortest: 'Shortest distance:', navVia: 'via points', navNote: 'With shortest distance, MotoNav hands the route to Google Maps or Yandex with via points. Other apps pick their own route.', dark: 'Dark', light: 'Light', autoTheme: 'Auto', pending: 'pending'
     }
   };
   var ICON = { motorcycle: '🏍️', car: '🚗', bicycle: '🚲', walking: '🚶' };
@@ -265,12 +265,28 @@
     });
   }
 
-  function navigateTo(r, s) {
-    if (!s) return;
-    var url = Geo.navLink(S.settings.navApp, s, r.mode);
+  function openNav(url) {
     var launcher = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.AppLauncher;
     if (launcher) { launcher.openUrl({ url: url }).catch(function () { window.open(url, '_blank', 'noopener'); }); return; }
     window.open(url, '_blank', 'noopener');
+  }
+  /* With "shortest distance" the navigation app would pick its own fastest route, so MotoNav
+   * works out the shortest road from where you are, and gives the app points along it. */
+  function navigateTo(r, s) {
+    if (!s) return;
+    var app = S.settings.navApp;
+    if (r.method !== 'distance' || !Geo.supportsVia(app) || !S.settings.server) { openNav(Geo.navLink(app, s, r.mode)); return; }
+    toast(t('navPrep'));
+    locate().then(function (me) {
+      if (!me) { toast(t('navNoLoc')); openNav(Geo.navLink(app, s, r.mode)); return; }
+      var opts = { mode: r.mode, method: 'distance', useHighways: r.useHighways, useTolls: r.useTolls, useFerry: r.useFerry, server: S.settings.server };
+      return Routing.geometry([{ lat: me.lat, lng: me.lng }, s], opts, window.fetch.bind(window)).then(function (g) {
+        if (!g) { toast(t('navNoRoute')); openNav(Geo.navLink(app, s, r.mode)); return; }
+        var via = Routing.sampleVia(g.line, 8);
+        toast(t('navShortest') + ' ' + Geo.fmtDistance(g.distance) + (via.length ? ' (' + via.length + ' ' + t('navVia') + ')' : ''));
+        openNav(Geo.navLink(app, s, r.mode, via));
+      });
+    });
   }
 
   // ---------- adding stops
@@ -416,6 +432,7 @@
         h('label', null, t('mode')), modeBox, h('div', { style: 'height:8px' }),
         check('useHighways', t('useHighways')), check('useTolls', t('useTolls')), check('useFerry', t('useFerry')),
         h('label', null, t('startTime')), time,
+        h('p', { class: 'muted' }, t('navNote')),
         S.settings.server === DEMO_SERVER ? h('p', { class: 'muted' }, t('demoWarn')) : null,
         h('div', { class: 'row', style: 'margin-top:12px' }, h('button', { onclick: close }, t('cancel')), go));
     });

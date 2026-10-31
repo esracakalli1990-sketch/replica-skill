@@ -51,3 +51,20 @@ test('formatting', () => {
   assert.strictEqual(G.fmtDuration(3900), '1 sa 5 dk');
   assert.strictEqual(G.fmtClock(485), '08:05');
 });
+
+test('google link carries via points as waypoints, in order', () => {
+  const url = G.navLink('google', { lat: 41.1, lng: 29.2 }, 'motorcycle', [[41.01, 29.01], [41.02, 29.02]]);
+  assert.match(url, /destination=41\.1,29\.2&travelmode=two-wheeler&waypoints=41\.010000,29\.010000%7C41\.020000,29\.020000$/);
+  assert.ok(!/waypoints/.test(G.navLink('google', { lat: 1, lng: 2 }, 'car')));
+});
+
+test('yandex link lists via points before the destination, starting from the current position', () => {
+  assert.strictEqual(G.navLink('yandex', { lat: 41.1, lng: 29.2 }, 'car', [[41.01, 29.01]]),
+    'yandexmaps://maps.yandex.com/?rtext=~41.010000,29.010000~41.1,29.2&rtt=auto');
+});
+
+test('only google and yandex take via points', () => {
+  assert.ok(G.supportsVia('google') && G.supportsVia('yandex'));
+  assert.ok(!G.supportsVia('waze') && !G.supportsVia('apple'));
+  assert.strictEqual(G.navLink('waze', { lat: 1, lng: 2 }, 'car', [[3, 4]]), 'https://waze.com/ul?ll=1,2&navigate=yes');
+});

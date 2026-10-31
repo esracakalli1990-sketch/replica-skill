@@ -88,14 +88,19 @@
   }
 
   /* Links that open a navigation app on the phone. mode: motorcycle|car|bicycle|walking */
-  function navLink(app, stop, mode) {
+  function pt(p) { return p[0].toFixed(6) + ',' + p[1].toFixed(6); }
+  /* via: optional [[lat, lng], ...] the route must pass through, in order. Only Google Maps and
+   * Yandex Maps accept them; for the other apps the destination alone is used. */
+  function navLink(app, stop, mode, via) {
     var ll = stop.lat + ',' + stop.lng;
+    via = via || [];
     switch (app) {
       case 'google':
         var tm = { motorcycle: 'two-wheeler', car: 'driving', bicycle: 'bicycling', walking: 'walking' }[mode] || 'driving';
-        return 'https://www.google.com/maps/dir/?api=1&destination=' + ll + '&travelmode=' + tm;
+        return 'https://www.google.com/maps/dir/?api=1&destination=' + ll + '&travelmode=' + tm +
+          (via.length ? '&waypoints=' + via.map(pt).join('%7C') : '');
       case 'waze': return 'https://waze.com/ul?ll=' + ll + '&navigate=yes';
-      case 'yandex': return 'yandexmaps://maps.yandex.com/?rtext=~' + ll + '&rtt=auto';
+      case 'yandex': return 'yandexmaps://maps.yandex.com/?rtext=~' + via.map(pt).concat([ll]).join('~') + '&rtt=auto';
       case 'apple': return 'https://maps.apple.com/?daddr=' + ll + '&dirflg=' + (mode === 'walking' ? 'w' : 'd');
       case 'here': return 'https://wego.here.com/directions/drive/mylocation/' + ll;
       default: return 'geo:' + ll + '?q=' + ll;
@@ -112,6 +117,8 @@
     return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
   }
 
-  return { parseCoords: parseCoords, parseCsv: parseCsv, parseGpx: parseGpx, parseKml: parseKml,
+  function supportsVia(app) { return app === 'google' || app === 'yandex'; }
+
+  return { supportsVia: supportsVia, parseCoords: parseCoords, parseCsv: parseCsv, parseGpx: parseGpx, parseKml: parseKml,
     parseFile: parseFile, navLink: navLink, fmtDistance: fmtDistance, fmtDuration: fmtDuration, fmtClock: fmtClock };
 });

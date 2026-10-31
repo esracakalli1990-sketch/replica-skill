@@ -83,3 +83,24 @@ test('geometry returns null when the engine fails', async () => {
   const g = await R.geometry(pts, { mode: 'car', server: 'https://example.test' }, async () => ({ ok: false, status: 500 }));
   assert.strictEqual(g, null);
 });
+
+test('via points are spread along the road line and leave the ends out', () => {
+  const line = []; for (let i = 0; i <= 100; i++) line.push([41 + i * 0.0005, 29]); // about 5.5 km north
+  const via = R.sampleVia(line, 8);
+  assert.strictEqual(via.length, 3); // one per 1.5 km, never more than max
+  assert.ok(via.every(p => p[0] > 41.0005 && p[0] < 41.0495));
+  assert.ok(via[0][0] < via[1][0] && via[1][0] < via[2][0]);
+  assert.ok(R.sampleVia(line, 2).length === 2);
+});
+
+test('via points are interpolated on a line with only two points', () => {
+  const via = R.sampleVia([[41.0, 29.0], [41.05, 29.0]], 8); // about 5.5 km
+  assert.strictEqual(via.length, 3);
+  assert.ok(Math.abs(via[1][0] - 41.025) < 0.001);
+});
+
+test('a short or empty line gets no via points', () => {
+  assert.deepStrictEqual(R.sampleVia([[41, 29], [41.005, 29]], 8), []);
+  assert.deepStrictEqual(R.sampleVia(null, 8), []);
+  assert.deepStrictEqual(R.sampleVia([[41, 29]], 8), []);
+});
