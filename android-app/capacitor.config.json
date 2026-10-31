@@ -1,0 +1,11 @@
+{
+  "appId": "com.motonav.app",
+  "appName": "MotoNav",
+  "webDir": "www",
+  "backgroundColor": "#0d1014",
+  "android": { "allowMixedContent": false },
+  "plugins": {
+    "CapacitorHttp": { "enabled": true },
+    "SplashScreen": { "launchShowDuration": 800, "backgroundColor": "#0d1014", "showSpinner": false, "androidScaleType": "CENTER_INSIDE" }
+  }
+}

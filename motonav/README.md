@@ -21,7 +21,6 @@ Settings has the routing server address. It starts as the public Valhalla demo s
 ```bash
 node --test motonav/test/*.test.js                       # optimiser, routing requests, file parsing
 NODE_PATH=$(npm root -g) node motonav/test/e2e.js        # browser test, needs Playwright and Chromium
-LEAFLET=/path/to/leaflet/dist ...                        # also test the map (npm pack leaflet)
 ```
 
 The browser test answers every network call itself (search, routing server, map files), so it runs offline. It checks how the app builds requests and reads answers. It does not check the real routing engine.

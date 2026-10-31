@@ -1,5 +1,5 @@
 /* Browser test for MotoNav. Needs Playwright and Chromium (see README in this folder).
- *   NODE_PATH=$(npm root -g) LEAFLET=/path/to/leaflet/dist node test/e2e.js
+ *   NODE_PATH=$(npm root -g) node test/e2e.js
  * All network calls are answered locally: address search, routing server, map library
  * and tiles. The routing answers are computed from the request, so this checks how the
  * app builds requests and reads answers, not the real routing engine. */
@@ -7,7 +7,6 @@ const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), path = require('path'), assert = require('assert');
 
 const ROOT = path.join(__dirname, '..');
-const LEAFLET = process.env.LEAFLET;
 const OUT = process.env.SHOTS || path.join(require('os').tmpdir(), 'motonav-shots');
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -42,7 +41,10 @@ async function setup(browser, base, opts) {
   page.on('dialog', d => d.dismiss());
   await ctx.route('**/*', async route => {
     const url = route.request().url();
-    if (url.startsWith(base)) return route.continue();
+    if (url.startsWith(base)) {
+      if (opts.noMap && url.includes('leaflet.js')) return route.abort();
+      return route.continue();
+    }
     if (url.includes('nominatim.openstreetmap.org/search')) {
       const q = decodeURIComponent(url.split('q=')[1]).toLowerCase();
       const hit = Object.keys(PLACES).filter(k => q.includes(k)).map(k => PLACES[k]);
@@ -60,10 +62,6 @@ async function setup(browser, base, opts) {
         const L = body.locations; let d = 0; for (let i = 0; i + 1 < L.length; i++) d += hav(L[i], L[i + 1]) * 1.3;
         return route.fulfill({ json: { trip: { summary: { length: d / 1000, time: d / 11 }, legs: [{ shape: enc(L.map(l => [l.lat, l.lon])) }] } } });
       }
-    }
-    if (url.includes('leaflet') && LEAFLET && !opts.noMap) {
-      const f = path.join(LEAFLET, url.endsWith('.css') ? 'leaflet.css' : 'leaflet.js');
-      return route.fulfill({ body: fs.readFileSync(f), contentType: url.endsWith('.css') ? 'text/css' : 'text/javascript' });
     }
     if (url.includes('google.com/maps')) { log.nav.push(url); return route.fulfill({ body: 'ok' }); }
     if (url.includes('tile.openstreetmap.org')) return route.fulfill({ status: 204 });
@@ -140,8 +138,7 @@ async function addBySearch(page, q) {
     await until(() => page.evaluate(id => window.MotoNavDebug.state().routes[0].stops[0].id === id, third));
   });
   await step('map tab draws one numbered marker per stop and a route line', async () => {
-    if (!LEAFLET) return console.log('     (skipped: set LEAFLET to test the map)');
-    await page.click('button:has-text("Harita")');
+        await page.click('button:has-text("Harita")');
     await page.waitForSelector('.leaflet-marker-icon');
     assert.strictEqual(await page.locator('.leaflet-marker-icon').count(), 5);
     assert.ok(await page.locator('path.leaflet-interactive').count() >= 1);

@@ -1,6 +1,6 @@
 /* Caches the app shell so saved routes and stop lists open without a connection. */
-const CACHE = 'motonav-v1';
-const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'lib/optimize.js', 'lib/routing.js', 'lib/geo.js', 'manifest.webmanifest', 'icon.svg'];
+const CACHE = 'motonav-v2';
+const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'lib/optimize.js', 'lib/routing.js', 'lib/geo.js', 'manifest.webmanifest', 'icon.svg', 'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));

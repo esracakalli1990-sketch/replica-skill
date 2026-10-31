@@ -268,6 +268,8 @@
   function navigateTo(r, s) {
     if (!s) return;
     var url = Geo.navLink(S.settings.navApp, s, r.mode);
+    var launcher = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.AppLauncher;
+    if (launcher) { launcher.openUrl({ url: url }).catch(function () { window.open(url, '_blank', 'noopener'); }); return; }
     window.open(url, '_blank', 'noopener');
   }
 
@@ -623,6 +625,6 @@
   // ---------- start
   load();
   render();
-  if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) navigator.serviceWorker.register('sw.js').catch(function () {});
+  if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0 && !window.Capacitor) navigator.serviceWorker.register('sw.js').catch(function () {});
   window.MotoNavDebug = { state: function () { return S; } };
 })();
